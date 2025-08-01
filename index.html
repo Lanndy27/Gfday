@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girlfriend Day - Home</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="apology-section">
+        <h1>Dedeee, masii ngambek aja nii?</h1>
+        <div class="gif-container">
+          <img
+            src="assets/Welsh Corgi Please GIF by Lazy Corgi.gif"
+            alt="Please GIF"
+            class="apology-gif"
+          />
+        </div>
+        <h1>Maafin mamas pwlisss</h1>
+        <div class="button-container">
+          <button id="btn_mau" onclick="forgiveMe()">
+            Iyaaa mamas ganteng
+          </button>
+          <button id="btn_gamau" onclick="gamau(this)">Ga</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-hearts"></div>
+    <script src="script.js"></script>
+    <script>
+      let clickCount = 0;
+
+      function gamau(id) {
+        clickCount++;
+
+        if (clickCount >= 3) {
+          // Setelah 3 kali klik, tombol tidak bisa diklik lagi
+          id.style.pointerEvents = "none";
+          id.style.opacity = "0.5";
+          id.innerHTML = "Harus Iya!";
+          return;
+        }
+
+        var mau = document.getElementById("btn_mau");
+        var container = document.querySelector(".button-container");
+        var containerRect = container.getBoundingClientRect();
+
+        // Generate posisi random yang tidak terlalu dekat dengan tombol "Iya"
+        var minDistance = 150; // Jarak minimum dari tombol "Iya"
+        var maxAttempts = 20;
+        var attempts = 0;
+        var newX, newY;
+
+        do {
+          newX = Math.random() * (containerRect.width - 120);
+          newY = Math.random() * (containerRect.height - 50);
+
+          // Hitung jarak dari tombol "Iya"
+          var mauRect = mau.getBoundingClientRect();
+          var mauX = mauRect.left - containerRect.left;
+          var mauY = mauRect.top - containerRect.top;
+
+          var distance = Math.sqrt(
+            Math.pow(newX - mauX, 2) + Math.pow(newY - mauY, 2)
+          );
+          attempts++;
+        } while (distance < minDistance && attempts < maxAttempts);
+
+        id.style.position = "absolute";
+        id.style.left = newX + "px";
+        id.style.top = newY + "px";
+      }
+
+      function forgiveMe() {
+        // Create hearts explosion
+        for (let i = 0; i < 20; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.innerHTML = "💖";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+            heart.style.fontSize = "30px";
+            heart.style.animation = "float 3s ease-out forwards";
+            heart.style.pointerEvents = "none";
+            heart.style.zIndex = "9999";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+              heart.remove();
+            }, 3000);
+          }, i * 100);
+        }
+
+        // Show message and redirect
+        setTimeout(() => {
+          alert("maaacii incees cantiii ^^");
+          setTimeout(() => {
+            window.location.href = "gallery.html";
+          }, 1000);
+        }, 500);
+      }
+    </script>
+  </body>
+</html>

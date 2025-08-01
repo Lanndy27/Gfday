@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5"
+      name="viewport"
+    />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/4f3ce16e3e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Girlfriend Day - Gallery</title>
+  </head>
+  <body>
+    <div id="bodyblur">
+      <img id="wallpaper" src="" width="100%" height="100%" />
+    </div>
+
+    <div id="Content">
+      <p id="idgeser"></p>
+      <div>
+        <blockquote id="bq">
+          <!-- Perbaikan: Semua gambar hidden kecuali yang pertama -->
+          <img id="foto1" src="" style="display: inline-flex" />
+          <img id="foto2" src="" style="display: none" />
+          <img id="foto3" src="" style="display: none" />
+          <img id="foto4" src="" style="display: none" />
+          <img id="foto5" src="" style="display: none" />
+          <img id="foto6" src="" style="display: none" />
+          <p id="katakata"></p>
+          <p id="katabawah"></p>
+        </blockquote>
+      </div>
+
+      <div id="contTom" style="display: none">
+        <a id="By" class="button" onClick="terima()">Lanjut</a>
+        <b id="buttonv2"></b>
+        <a id="Bn" class="button" onClick="tolak()">Engga</a>
+      </div>
+    </div>
+
+    <script>
+      const body = document.querySelector("body");
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "fas fa-heart";
+        heart.style.left = Math.random() * 90 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        body.appendChild(heart);
+      }
+      setInterval(function name(params) {
+        var heartArr = document.querySelectorAll(".fa-heart");
+        if (heartArr.length > 100) {
+          heartArr[0].remove();
+        }
+      }, 100);
+    </script>
+
+    <script>
+      function nonFo() {
+        document.getElementById("idfoto").style.display = "none";
+      }
+      function showFo() {
+        document.getElementById("idfoto").style.display = "block";
+      }
+      function nonDiv() {
+        document.getElementById("Content").style =
+          "opacity:0;visibility:hidden;margin-top:30vh;";
+      }
+      function showDiv() {
+        Bn.style = "display:none";
+        setTimeout(kpemb, 100);
+        document.getElementById("Content").style =
+          "opacity:1;margin-top:4vh;animation:kont 3s infinite;";
+        document.getElementById("katakata").innerHTML = kata1;
+      }
+      function loadfoto() {
+        document.getElementById("foto1").src = gambar1;
+        document.getElementById("foto2").src = gambar2;
+        document.getElementById("foto3").src = gambar3;
+        document.getElementById("foto4").src = gambar4;
+        document.getElementById("foto5").src = gambar5;
+        document.getElementById("foto6").src = gambar6;
+      }
+      function showAkhir() {
+        setInterval(createHeart, 200);
+        document.getElementById("k2").style =
+          "opacity:1;transform:scale(1);margin:0;";
+        document.getElementById("ftdua").style = "transform:scale(1);";
+        document.getElementById("final1").style = "transform:scale(1);";
+        document.getElementById("Content").style.display = "none";
+      }
+      function mulaiakhir() {
+        nonDiv();
+        setTimeout(showAkhir, 1400);
+        setTimeout(finalis, 2400);
+      }
+      function showTom() {
+        document.getElementById("idkirim").style =
+          "opacity:1;visibility:visible;margin-top:140px;";
+      }
+      function tombol() {
+        contTom.style = "display:flex";
+      }
+      function otomatis() {
+        befanimkata();
+        setTimeout(animkata, 400);
+        contTom.style = "display:none";
+        setTimeout(tombol, 1200);
+      }
+      function befanimkata() {
+        katakata.style = "transform:scale(.01);";
+        katabawah.style = "transform:scale(.01);";
+      }
+      function animkata() {
+        katakata.style = "transform:scale(1);";
+        katabawah.style = "transform:scale(1);";
+      }
+
+      async function terimateks() {
+        By.innerHTML = "Mau";
+        Bn.style = "display:flex";
+        setTimeout(animkata, 400);
+        setTimeout(kats, 1500);
+      }
+      async function tolakteks() {
+        await swalst.fire("" + teksnolak);
+      }
+
+      var aa = 0,
+        pemb;
+      pemb = "";
+      var ii = 0,
+        katanya;
+      katanya = "";
+      var i = 0,
+        katanyab;
+      katanyab = "";
+      var u = 0,
+        text2;
+      text2 = "";
+      var o = 0,
+        text3;
+      text3 = "";
+      var a = 0,
+        final1;
+      final1 = "";
+      var ab = 0,
+        final2;
+      final2 = "";
+
+      function kpemb() {
+        if (aa < pemb.length) {
+          document.getElementById("idgeser").innerHTML += pemb.charAt(aa);
+          aa++;
+          setTimeout(kpemb, 40);
+        }
+        if (aa == pemb.length) {
+          setTimeout(tombol, 1200);
+          document.getElementById("idgeser").style = "display:none";
+          document.getElementById("bq").style =
+            "opacity:1;visibility:visible;margin-top:0";
+          document.getElementById("bodyblur").style = "opacity:1;";
+        }
+      }
+      function kats() {
+        if (ii < katanya.length) {
+          document.getElementById("katabawah").innerHTML += katanya.charAt(ii);
+          ii++;
+          setTimeout(kats, 80);
+        }
+        if (ii == katanya.length) {
+          document.getElementById("katabawah").innerHTML = katanya + emotsenyum;
+          setTimeout(tombol, 800);
+        }
+      }
+      function kbwh() {
+        if (i < katanyab.length) {
+          document.getElementById("katabawah").innerHTML += katanyab.charAt(i);
+          i++;
+          setTimeout(kbwh, 180);
+        }
+        if (i == katanyab.length) {
+          document.getElementById("katabawah").innerHTML =
+            katanyab + emotsenyum;
+          setTimeout(tombol, 800);
+        }
+      }
+
+      flag = 1;
+      flagg = 1;
+      function tolak() {
+        if (fungsi == 1) {
+          if (flagg == 1) {
+            Bn.style = "margin-left:90px;transform: rotate(45deg)";
+            buttonv2.style = "opacity:1;";
+            By.style = "opacity:0";
+            document.getElementById("buttonv2").innerHTML = tekstolak1;
+            flagg = 2;
+          } else if (flagg == 2) {
+            Bn.style = "margin-left:95px;transform: rotate(135deg)";
+            document.getElementById("buttonv2").innerHTML = tekstolak2;
+            flagg = 3;
+          } else if (flagg == 3) {
+            Bn.style = "margin:12px 8px 12px 0;transform: rotate(360deg)";
+            buttonv2.style = "opacity:0;";
+            By.style = "opacity:1";
+            flagg = 1;
+          }
+        } else if (fungsi == 5) {
+          if (flag == 1) {
+            Bn.style = "margin-left:90px;";
+            buttonv2.style = "opacity:1;";
+            By.style = "opacity:0";
+            document.getElementById("buttonv2").innerHTML = tekstolak11;
+            flag = 2;
+          } else if (flag == 2) {
+            Bn.style = "margin-left:95px;transform: rotate(90deg)";
+            document.getElementById("buttonv2").innerHTML = tekstolak22;
+            flag = 3;
+          } else if (flag == 3) {
+            Bn.style = "margin:12px 8px 12px 0";
+            buttonv2.style = "opacity:0;";
+            By.style = "opacity:1";
+            flag = 1;
+          }
+        }
+      }
+
+      tekstolak1 = "Eits 😝";
+      tekstolak11 = "Yakin?";
+      tekstolak2 = "Gabisa 😝";
+      tekstolak22 = "Eits 😝";
+      teksnolak = "Harus mau!!! 😝";
+
+      fungsi = 1;
+      async function terima() {
+        if (fungsi == 1) {
+          // Sembunyikan foto1, tampilkan foto2
+          foto1.style = "display:none";
+          foto2.style = "display:inline-flex";
+          katakata.innerHTML = kata2;
+          otomatis();
+          fungsi = 2;
+        } else if (fungsi == 2) {
+          // Sembunyikan foto2, tampilkan foto3
+          foto2.style = "display:none";
+          foto3.style = "display:inline-flex";
+          katakata.innerHTML = kata3;
+          otomatis();
+          fungsi = 3;
+        } else if (fungsi == 3) {
+          // Sembunyikan foto3, tampilkan foto4
+          foto3.style = "display:none";
+          foto4.style = "display:inline-flex";
+          katakata.innerHTML = kata4;
+          otomatis();
+          fungsi = 4;
+        } else if (fungsi == 4) {
+          // Sembunyikan foto4, tampilkan foto5
+          foto4.style = "display:none";
+          foto5.style = "display:inline-flex";
+          katakata.innerHTML = kata5;
+          terimateks();
+          befanimkata();
+          setTimeout(animkata, 400);
+          contTom.style = "display:none";
+          fungsi = 5;
+        } else if (fungsi == 5) {
+          // Sembunyikan foto5, tampilkan foto6
+          foto5.style = "display:none";
+          foto6.style = "display:inline-flex";
+          katakata.innerHTML = katakhir;
+          document.getElementById("katabawah").innerHTML = katakhirb;
+          befanimkata();
+          setTimeout(animkata, 400);
+          contTom.style = "display:none";
+          setTimeout(() => {
+            window.location.href = "message.html";
+          }, 3300);
+          setInterval(createHeart, 200);
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      const swals = Swal.mixin({
+        allowOutsideClick: false,
+        cancelButtonColor: "#FF0040",
+        confirmButtonText: "Oke sayang",
+        customClass: {
+          popup: "custom-swal-popup",
+          title: "custom-swal-title",
+          content: "custom-swal-content",
+          confirmButton: "custom-swal-button",
+        },
+      });
+      const swalsy = Swal.mixin({
+        confirmButtonText: "Oke sayang",
+        allowOutsideClick: false,
+        customClass: {
+          popup: "custom-swal-popup",
+          title: "custom-swal-title",
+          content: "custom-swal-content",
+          confirmButton: "custom-swal-button",
+        },
+      });
+      const swalst = Swal.mixin({
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        customClass: {
+          popup: "custom-swal-popup",
+          title: "custom-swal-title",
+          content: "custom-swal-content",
+        },
+      });
+
+      // Ganti isinya di sini - Gambar yang berbeda-beda
+      async function apapun() {
+        await swals.fire("lanjuuut dede saaayaang❤");
+
+        pemb = "....         ";
+
+        wallpaper.src = "assets/WhatsApp Image 2025-08-01 at 21.46.08.jpeg";
+
+        // Gambar 1 - Cute couple
+        gambar1 = "assets/3.thumb128.png";
+        kata1 = "Dedeee sayaang ❤❤";
+
+        // Gambar 2 - Different cute expression
+        gambar2 = "assets/0-1.thumb128.webp";
+        kata2 = "mamas yang coklat ini mau ngomong serius ke dedee❤";
+
+        // Gambar 3 - Thinking/wondering
+        gambar3 = "assets/0-1.thumb128.webp";
+        kata3 = "maapiin mamas banyak kesalhan sama dede harini :(";
+
+        // Gambar 4 - Love confession
+        gambar4 = "assets/0-1.thumb128.webp";
+        kata4 = "nda ucapin happy gf lebih awal dan sibuk buat ini :(";
+
+        // Gambar 5 - Romantic proposal
+        gambar5 = "assets/0.thumb128.png";
+        kata5 =
+          "mamas merendah jadi pig oink oink untuk meminta maaf kepada incess dede cantii";
+        katanya = "marii berdamai dan nikahin mamas oink oink?";
+        emotsenyum = "😃";
+
+        // Gambar 6 - Happy celebration
+        gambar6 = "assets/15-1.thumb128.webp";
+        katakhir =
+          "Yeayyy! Makasih sayang, mamas berubah wujud jadi coklat agi ❤";
+        katakhirb = "I Love You ❤❤❤";
+
+        showDiv();
+        loadfoto();
+      }
+
+      apapun();
+    </script>
+
+    <style>
+      /* Custom SweetAlert2 styling - Sesuai dengan tema halaman */
+      .custom-swal-popup {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px) !important;
+        border-radius: 20px !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .custom-swal-title {
+        color: #fff !important;
+        font-size: 1.8rem !important;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+      }
+
+      .custom-swal-content {
+        color: #fff !important;
+        font-size: 1.2rem !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+      }
+
+      .custom-swal-button {
+        background: transparent !important;
+        color: white !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 50px !important;
+        padding: 1.2rem 2.5rem !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        backdrop-filter: blur(10px) !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+        transition: all 0.3s ease !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        min-width: 140px !important;
+      }
+
+      .custom-swal-button:hover {
+        transform: translateY(-3px) scale(1.05) !important;
+        border-color: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2) !important;
+      }
+
+      .custom-swal-button:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+      }
+
+      /* Override default SweetAlert2 styling */
+      .swal2-popup {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px) !important;
+        border-radius: 20px !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .swal2-title {
+        color: #fff !important;
+        font-size: 1.8rem !important;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+      }
+
+      .swal2-html-container {
+        color: #fff !important;
+        font-size: 1.2rem !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+      }
+
+      .swal2-confirm {
+        background: transparent !important;
+        color: white !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 50px !important;
+        padding: 1.2rem 2.5rem !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        backdrop-filter: blur(10px) !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+        transition: all 0.3s ease !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        min-width: 140px !important;
+      }
+
+      .swal2-confirm:hover {
+        transform: translateY(-3px) scale(1.05) !important;
+        border-color: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2) !important;
+      }
+
+      .swal2-confirm:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+      }
+
+      /* Timer progress bar styling */
+      .swal2-timer-progress-bar {
+        background: rgba(255, 255, 255, 0.6) !important;
+      }
+    </style>
+  </body>
+</html>

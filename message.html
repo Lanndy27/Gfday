@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girlfriend Day - Message</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-image: url("assets/WhatsApp Image 2025-08-01 at 21.46.08.jpeg");
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("assets/WhatsApp Image 2025-08-01 at 21.46.08.jpeg");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        z-index: -1;
+        transform: none;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: optimize-contrast;
+        image-rendering: high-quality;
+        -ms-interpolation-mode: bicubic;
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        text-align: center;
+        color: #fff;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .message-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1000px;
+        margin-bottom: 4rem;
+      }
+
+      /* Surat di tengah - tepat di bawah judul */
+      .love-letter {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        color: #333;
+        backdrop-filter: blur(10px);
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        animation: fadeInUp 1s ease-out;
+        margin: 0 auto;
+      }
+
+      .love-letter h2 {
+        color: #ff6b6b;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+
+      .love-letter p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      .signature {
+        text-align: right;
+        font-style: italic;
+        color: #ff6b6b;
+        font-weight: bold;
+        margin-top: 2rem;
+      }
+
+      /* Titik merah menyala di kanan surat - DIHAPUS */
+
+      /* Canvas untuk animasi hati di bawah surat - tanpa background */
+      .heart-canvas-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 300px;
+        position: relative;
+        margin-top: 2rem;
+        gap: 1rem;
+      }
+
+      /* Button Lihat untuk ke halaman 4 */
+      .view-button-container {
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .view-button {
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .view-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .view-button:hover::before {
+        left: 100%;
+      }
+
+      .view-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        border-color: rgba(255, 255, 255, 1);
+        background: linear-gradient(45deg, #ff5252, #ff7979);
+      }
+
+      .view-button:active {
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+      }
+
+      #heartCanvas {
+        /* Hapus background, border, dan shadow */
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      /* Floating hearts background */
+      .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 20px;
+        color: rgba(255, 107, 107, 0.7);
+        animation: float 4s ease-out forwards;
+        pointer-events: none;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body::before {
+          background-attachment: scroll;
+        }
+
+        .container {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .message-layout {
+          flex-direction: column;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        .love-letter {
+          padding: 2rem;
+          max-width: 100%;
+        }
+
+        .right-dots {
+          display: none;
+        }
+
+        .heart-container {
+          height: 150px;
+        }
+
+        .heart-canvas-container {
+          height: 280px;
+          margin-top: 1rem;
+          gap: 0.5rem;
+        }
+
+        .view-button {
+          padding: 0.8rem 2rem;
+          font-size: 1rem;
+        }
+
+        #heartCanvas {
+          max-width: 90%;
+          max-height: 180px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Love Message from your Mr. Right, Fadhlan 💌</h1>
+
+      <div class="message-layout">
+        <!-- Surat di tengah tepat di bawah judul -->
+        <div class="love-letter">
+          <h2>To my amazing Girlfriend</h2>
+          <p>
+            Every day with you feels like a celebration, but today is extra
+            special because it's officially Girlfriend Day!
+          </p>
+          <p>
+            Timekasiii heem sayaang udaa jadii ceweena mamas sampee sekarangg,
+            dan maapin mamas cuma bisa kasii kaya gini, mamas sangat sayang
+            dedee cintaa dede suka dedee mauuu samaaa dedeee teruuuss Makasih
+            udah mau nerima mamas apa adanya, timekasii suda mau diuji
+            kesabarannya sama tingkah mamas yang selalu nyebelin. dede oraang
+            terbaik yang pernah mamas punya. Semoga makin langgeng sama dedee,
+            lebi banyaa ngabisin waktu bareng dedee. Mamas mau liat dede ketawa
+            terus, mau liat dede tumbuh bareng mamas, mauu dede selamanyaa, mau
+            jadi alasan dede senyum setiap hari. Happy Girlfriend Day sayang!
+            Semoga hari ini spesial buat dede, dan semoga dede tau betapa
+            berartinya dede buat mamas. Love you so much dedeku tersayang! 💕
+          </p>
+          <p>
+            Terakhi Thank you for being the incredible person you are -
+            beautiful, kind, funny, and absolutely perfect in every way.
+          </p>
+          <p class="signature">
+            With all my love,<br />Your future husband mamas 💕
+          </p>
+        </div>
+      </div>
+
+      <!-- Canvas animasi hati di bawah surat dengan button -->
+      <div class="heart-canvas-container">
+        <!-- Button untuk ke halaman 4 -->
+        <div class="view-button-container">
+          <button id="viewButton" class="view-button" onclick="goToPage4()">
+            sentuh ini dedee cantii
+          </button>
+        </div>
+        <canvas id="heartCanvas"></canvas>
+      </div>
+    </div>
+
+    <div class="floating-hearts"></div>
+
+    <script>
+      // Floating hearts background animation
+      function createFloatingHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        heart.style.fontSize = Math.random() * 8 + 12 + "px";
+
+        const floatingContainer = document.querySelector(".floating-hearts");
+        if (floatingContainer) {
+          floatingContainer.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 5000);
+        }
+      }
+
+      // Tool class untuk random number dan warna
+      class Tool {
+        static randomNumber(min, max) {
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        static randomColorHSL(hue, saturation, lightness) {
+          return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+      }
+
+      // Angle class untuk rotasi
+      class Angle {
+        constructor(a) {
+          this.a = a;
+          this.rad = (this.a * Math.PI) / 180;
+        }
+
+        incDec(num) {
+          this.a += num;
+          this.rad = (this.a * Math.PI) / 180;
+        }
+      }
+
+      // Heart class untuk menggambar hati
+      class Heart {
+        constructor(ctx, x, y, r, i) {
+          this.ctx = ctx;
+          this.init(x, y, r, i || 0);
+        }
+
+        init(x, y, r, i) {
+          this.x = x;
+          this.xi = x;
+          this.y = y;
+          this.yi = y;
+          this.r = r;
+          this.i = i * 0.3 + 150;
+          this.l = this.i;
+          // Warna pink/merah romantis
+          this.c = Tool.randomColorHSL(Tool.randomNumber(330, 360), 80, 65);
+          this.a = new Angle(Tool.randomNumber(0, 360));
+          this.v = {
+            x: Math.random() * 0.5,
+            y: -Math.random() * 0.5,
+          };
+          this.ga = Math.random() * 0.8 + 0.2;
+        }
+
+        draw() {
+          const ctx = this.ctx;
+          ctx.save();
+          ctx.globalCompositeOperation = "lighter";
+          ctx.globalAlpha = this.ga;
+          ctx.beginPath();
+          ctx.fillStyle = this.c;
+          ctx.moveTo(this.x, this.y + this.r);
+          ctx.bezierCurveTo(
+            this.x - this.r - this.r / 5,
+            this.y + this.r / 1.5,
+            this.x - this.r,
+            this.y - this.r,
+            this.x,
+            this.y - this.r / 5
+          );
+          ctx.bezierCurveTo(
+            this.x + this.r,
+            this.y - this.r,
+            this.x + this.r + this.r / 5,
+            this.y + this.r / 1.5,
+            this.x,
+            this.y + this.r
+          );
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+
+        updateParams() {
+          this.a.incDec(1);
+          Math.sin(this.a.rad) < 0
+            ? (this.r = -Math.sin(this.a.rad) * 10)
+            : (this.r = Math.sin(this.a.rad) * 10);
+        }
+
+        updatePosition() {
+          this.l -= 0.5;
+          if (this.l < 0) {
+            this.v.y -= 0.005;
+            this.v.x += 0.01;
+            this.y += this.v.y;
+            this.x += this.v.x;
+          }
+        }
+
+        wrapPosition() {
+          if (this.x > 400 * 1.2) {
+            this.init(this.xi, this.yi, Tool.randomNumber(4, 8), this.i);
+          }
+        }
+
+        render() {
+          this.wrapPosition();
+          this.updateParams();
+          this.updatePosition();
+          this.draw();
+        }
+
+        offRender() {
+          this.draw();
+        }
+      }
+
+      // Canvas class untuk animasi hati
+      class HeartCanvas {
+        constructor(canvasId) {
+          this.canvas = document.getElementById(canvasId);
+          this.ctx = this.canvas.getContext("2d");
+          // Ukuran sedang untuk di bawah surat
+          this.width = this.canvas.width = 400;
+          this.height = this.canvas.height = 250;
+          this.canvas.style.width = this.width + "px";
+          this.canvas.style.height = this.height + "px";
+          this.heartSize = 80; // Ukuran sedang
+          this.hearts = [];
+          this.data = null;
+        }
+
+        createTemplate() {
+          // Buat template hati di tengah
+          const tempCanvas = document.createElement("canvas");
+          tempCanvas.width = this.width;
+          tempCanvas.height = this.height;
+          const tempCtx = tempCanvas.getContext("2d");
+
+          const templateHeart = new Heart(
+            tempCtx,
+            this.width / 2,
+            this.height / 2.2,
+            this.heartSize
+          );
+          templateHeart.offRender();
+
+          // Ambil data untuk membuat partikel
+          this.data = tempCtx.getImageData(0, 0, this.width, this.height).data;
+          this.createParticles();
+        }
+
+        createParticles() {
+          let index = 0;
+          for (let i = 0; i < this.height; i += 8) {
+            for (let j = 0; j < this.width; j += 8) {
+              let oI = (j + i * this.width) * 4 + 3;
+              if (this.data[oI] > 0) {
+                index++;
+                const h = new Heart(
+                  this.ctx,
+                  j + Tool.randomNumber(-2, 2),
+                  i + Tool.randomNumber(-2, 2),
+                  Tool.randomNumber(3, 6),
+                  index
+                );
+                this.hearts.push(h);
+              }
+            }
+          }
+        }
+
+        render() {
+          this.ctx.clearRect(0, 0, this.width, this.height);
+          for (let i = 0; i < this.hearts.length; i++) {
+            this.hearts[i].render();
+          }
+        }
+      }
+
+      // Inisialisasi animasi hati yang disederhanakan
+      let heartCanvas;
+
+      function initHeartAnimation() {
+        try {
+          heartCanvas = new HeartCanvas("heartCanvas");
+          heartCanvas.createTemplate();
+
+          // Start animation loop
+          function renderHearts() {
+            heartCanvas.render();
+            requestAnimationFrame(renderHearts);
+          }
+          renderHearts();
+
+          console.log("Heart animation initialized successfully");
+        } catch (error) {
+          console.error("Error initializing heart animation:", error);
+          // Fallback: tampilkan hati sederhana
+          showFallbackHeart();
+        }
+      }
+
+      // Fallback jika canvas gagal
+      function showFallbackHeart() {
+        const canvas = document.getElementById("heartCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 400;
+        canvas.height = 250;
+
+        function drawSimpleHeart() {
+          ctx.clearRect(0, 0, 400, 250);
+          ctx.fillStyle = "#ff6b6b";
+          ctx.globalAlpha = 0.8;
+
+          // Gambar hati sederhana
+          const x = 200,
+            y = 120,
+            size = 40;
+          ctx.beginPath();
+          ctx.moveTo(x, y + size);
+          ctx.bezierCurveTo(
+            x - size,
+            y,
+            x - size,
+            y - size / 2,
+            x,
+            y - size / 4
+          );
+          ctx.bezierCurveTo(x + size, y - size / 2, x + size, y, x, y + size);
+          ctx.fill();
+
+          requestAnimationFrame(drawSimpleHeart);
+        }
+        drawSimpleHeart();
+      }
+
+      // Function untuk navigasi ke halaman 4
+      function goToPage4() {
+        // Tambahkan efek loading atau animasi jika diinginkan
+        document.querySelector(".view-button").innerHTML = "Loading... ✨";
+        document.querySelector(".view-button").style.background =
+          "linear-gradient(45deg, #ffd700, #ffed4e)";
+
+        // Redirect ke halaman 4 setelah delay singkat untuk efek
+        setTimeout(() => {
+          window.location.href = "page4.html"; // Ganti dengan nama file halaman 4 yang sesuai
+        }, 800);
+      }
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 800);
+
+        // Initialize heart canvas animation
+        setTimeout(initHeartAnimation, 1000);
+      });
+    </script>
+  </body>
+</html>
